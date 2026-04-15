@@ -12,158 +12,110 @@ const categories = [
 ];
 
 const stats = [
-  { number: "2", label: "Founders" },
-  { number: "10+", label: "Projects Shipped" },
-  { number: "4", label: "Domains" },
-  { number: "∞", label: "Ambition" },
+  { number: "02", label: "FOUNDERS" },
+  { number: "15+", label: "SHIPPED" },
+  { number: "04", label: "DOMAINS" },
+  { number: "∞", label: "PASSION" },
 ];
 
 export default function AboutSection() {
   const sectionRef = useRef(null);
-  const labelRef = useRef(null);
+  const marqueeRef = useRef(null);
   const titleRef = useRef(null);
-  const descRef = useRef(null);
-  const cardsRef = useRef([]);
-  const statsRef = useRef([]);
-  const tagsRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Label entrance
+      // Title reveal animation
       gsap.fromTo(
-        labelRef.current,
-        { opacity: 0, x: -30 },
+        ".reveal-char",
+        { y: 100, rotateX: -90, opacity: 0 },
         {
-          opacity: 1,
-          x: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: labelRef.current,
-            start: "top 85%",
-          },
-        }
-      );
-
-      // Title entrance
-      gsap.fromTo(
-        titleRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
           y: 0,
-          duration: 1,
-          ease: "power3.out",
+          rotateX: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.05,
+          ease: "power4.out",
           scrollTrigger: {
             trigger: titleRef.current,
-            start: "top 85%",
+            start: "top 80%",
           },
         }
       );
 
-      // Description
+      // Marquee animation
+      gsap.to(marqueeRef.current, {
+        xPercent: -50,
+        ease: "none",
+        duration: 20,
+        repeat: -1,
+      });
+
+      // Cards parallax
       gsap.fromTo(
-        descRef.current,
-        { opacity: 0 },
+        ".about-card",
+        { y: 100, opacity: 0 },
         {
+          y: 0,
           opacity: 1,
+          stagger: 0.2,
           duration: 1,
-          ease: "power2.out",
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: descRef.current,
+            trigger: ".about-grid",
             start: "top 85%",
           },
         }
       );
 
-      // Cards stagger
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 40 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: i * 0.12,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-            },
-          }
-        );
-      });
-
-      // Stats counter animation
-      statsRef.current.forEach((stat, i) => {
-        if (!stat) return;
-        gsap.fromTo(
-          stat,
-          { opacity: 0, y: 30 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            delay: i * 0.1,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: stat,
-              start: "top 90%",
-            },
-          }
-        );
-      });
-
-      // Tags
-      if (tagsRef.current) {
-        gsap.fromTo(
-          tagsRef.current,
-          { opacity: 0 },
-          {
-            opacity: 0.35,
-            duration: 1,
-            scrollTrigger: {
-              trigger: tagsRef.current,
-              start: "top 90%",
-            },
-          }
-        );
-      }
+      // Stats stagger
+      gsap.fromTo(
+        ".about-stat",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          stagger: 0.1,
+          duration: 1,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: ".about-stats",
+            start: "top 90%",
+          },
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="about premium-grid">
+    <section ref={sectionRef} id="about" className="about">
       <div className="container">
-        {/* Header */}
         <div className="about-header">
           <div>
-            <span ref={labelRef} className="section-label" style={{ opacity: 0 }}>
-              / WHAT WE DO
-            </span>
-            <h2 ref={titleRef} className="section-title" style={{ opacity: 0 }}>
-              PAIRED <span className="muted">FOR</span> IMPACT.
+            <span className="section-label">/ OUR APPROACH</span>
+            <h2 ref={titleRef} className="section-title" style={{ perspective: "1000px" }}>
+              {["PAIRED", "FOR", "IMPACT."].map((word, i) => (
+                <span key={i} className="text-reveal">
+                  {word.split("").map((char, j) => (
+                    <span key={j} className="reveal-char">{char}</span>
+                  ))}
+                  <span className="reveal-char">&nbsp;</span>
+                </span>
+              ))}
             </h2>
           </div>
-          <p ref={descRef} className="text-body" style={{ opacity: 0 }}>
-            DevDuo operates at the intersection of design and engineering. Together, 
-            we tackle challenges that require both creative vision and technical depth.
+          <p className="text-body">
+            DevDuo is an elite collaboration of two specialists who believe in 
+            the power of focus. We don't scale with people; we scale with 
+            intelligence and craftsmanship.
           </p>
         </div>
 
-        {/* Feature Grid */}
         <div className="about-grid">
-          {categories.map((cat, idx) => (
-            <div
-              key={cat.id}
-              ref={(el) => (cardsRef.current[idx] = el)}
-              className="about-card"
-              style={{ opacity: 0 }}
-            >
+          {categories.map((cat) => (
+            <div key={cat.id} className="about-card interactive">
               <span className="about-card-id">{cat.id} //</span>
               <h3>{cat.title}</h3>
               <p>{cat.detail}</p>
@@ -171,30 +123,27 @@ export default function AboutSection() {
           ))}
         </div>
 
-        {/* Stats */}
         <div className="about-stats">
-          {stats.map((stat, idx) => (
-            <div
-              key={stat.label}
-              ref={(el) => (statsRef.current[idx] = el)}
-              className="about-stat"
-              style={{ opacity: 0 }}
-            >
+          {stats.map((stat) => (
+            <div key={stat.label} className="about-stat">
               <div className="about-stat-number">{stat.number}</div>
               <div className="about-stat-label">{stat.label}</div>
             </div>
           ))}
         </div>
+      </div>
 
-        {/* Brand Tags */}
-        <div ref={tagsRef} className="about-brand-tags" style={{ opacity: 0 }}>
-          {["PARTNERSHIP", "INNOVATION", "DEPLOYMENT", "EXCELLENCE"].map((tag) => (
-            <span key={tag}>{tag}</span>
+      {/* Premium Marquee */}
+      <div className="marquee-wrapper">
+        <div ref={marqueeRef} className="marquee-content">
+          {[...Array(6)].map((_, i) => (
+            <span key={i} className="marquee-text">
+              DEVDUO • DIGITAL CRAFT • TWO MINDS • ONE VISION • 2024 •&nbsp;
+            </span>
           ))}
         </div>
       </div>
 
-      {/* Background decoration */}
       <div className="about-blob" />
     </section>
   );

@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import DynamicBackground from "../components/DynamicBackground";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,7 +104,8 @@ export default function Services() {
   }, []);
 
   return (
-    <div ref={pageRef}>
+    <div ref={pageRef} style={{ position: "relative", zIndex: 1, minHeight: "100vh", background: "transparent" }}>
+      <DynamicBackground mode="about" />
       <Navbar />
 
       {/* Page Hero */}

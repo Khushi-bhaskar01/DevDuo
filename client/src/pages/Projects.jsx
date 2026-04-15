@@ -14,7 +14,7 @@ const HARDCODED_PROJECTS = [
     deployedLink: "https://dev-source-portfolio.vercel.app/",
     domain: "Web Development",
     description:
-      "Our flagship portfolio — a showcase of everything we've built as a duo. Dynamic content, premium animations, and an identity that speaks for itself.",
+      "Our flagship portfolio - a showcase of everything we've built as a duo. Dynamic content, premium animations, and an identity that speaks for itself.",
     tags: ["GSAP", "React", "Vite"],
     image: "/portfolio.png",
   },
@@ -25,7 +25,7 @@ const HARDCODED_PROJECTS = [
     deployedLink: "https://www.icpcusict.dev/",
     domain: "Web Development",
     description:
-      "Official Website of ICPC USICT ACM Student Chapter — Competitive Programming Portal with problem archives, live contest updates, member profiles and leaderboard.",
+      "Official website of ICPC USICT ACM Student Chapter - competitive programming portal with problem archives, live contest updates, member profiles and leaderboard.",
     tags: ["Next.js", "Node.js"],
     image: "/icpc.png",
   },
@@ -47,160 +47,219 @@ const HARDCODED_PROJECTS = [
     deployedLink: "https://doggos-of-ipu.vercel.app/",
     domain: "Web Development",
     description:
-      "Community-driven platform showcasing the beloved dogs of IPU campus — featuring photos, adoption, events and heartwarming stories contributed by students.",
+      "Community-driven platform showcasing the beloved dogs of IPU campus - featuring photos, adoption, events and heartwarming stories contributed by students.",
     tags: ["Next.js", "Supabase"],
     image: "/doggos.png",
   },
 ];
 
-const N = HARDCODED_PROJECTS.length;
-
 export default function Projects() {
-  const outerRef = useRef(null);
-  const trackRef = useRef(null);
-  const heroRef = useRef(null);
+  const pageRef = useRef(null);
+  const cardsRef = useRef([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const track = trackRef.current;
-
-      // Travel distance = full track width minus one viewport
-      const travelDist = () => track.scrollWidth - window.innerWidth;
-
-      // ── Hero entrance ──────────────────────────────────────
       gsap.from(".pw-hero-label", {
         opacity: 0,
-        x: -20,
+        x: -24,
         duration: 0.8,
         ease: "power3.out",
         delay: 0.2,
       });
-      gsap.from(".pw-hero-title", {
+
+      gsap.from(".pw-hero-title-line", {
         opacity: 0,
-        y: 60,
-        duration: 1,
-        ease: "power3.out",
-        delay: 0.35,
+        yPercent: 100,
+        duration: 1.1,
+        stagger: 0.08,
+        ease: "power4.out",
+        delay: 0.3,
       });
+
       gsap.from(".pw-hero-hint", {
         opacity: 0,
-        y: 20,
+        y: 24,
         duration: 0.8,
         ease: "power3.out",
-        delay: 0.65,
+        delay: 0.8,
       });
 
-      // ── GSAP horizontal scroll ─────────────────────────────
-      const hst = gsap.to(track, {
-        x: () => -travelDist(),
-        ease: "power1.out",
-        scrollTrigger: {
-          trigger: outerRef.current,
-          start: "top top",
-          end: () => `+=${travelDist() * 2}`,
-          scrub: 1.8,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
+      cardsRef.current.forEach((card, idx) => {
+        if (!card) return;
 
-      // ── Per-card content reveal ────────────────────────────
-      track.querySelectorAll(".pw-card-body").forEach((body, i) => {
-        if (i === 0) return;
-        gsap.from(body, {
-          opacity: 0,
-          x: 50,
-          duration: 1.5,
-          ease: "power2.out",
+        const image = card.querySelector(".bg-img");
+        const body = card.querySelector(".project-card-body");
+        const number = card.querySelector(".big-number");
+        const chips = card.querySelectorAll(".project-tag, .project-member");
+        const nextCard = cardsRef.current[idx + 1];
+        const stackItem = card.closest(".project-stack-item");
+        const nextStackItem = nextCard?.closest(".project-stack-item");
+
+        const tl = gsap.timeline({
           scrollTrigger: {
-            containerAnimation: hst,
-            trigger: body.closest(".pw-card"),
-            start: "left 85%",
-            toggleActions: "play none none none",
+            trigger: stackItem || card,
+            start: "top 82%",
           },
         });
+
+        tl.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 90,
+            rotate: idx % 2 === 0 ? -1.8 : 1.8,
+            scale: 0.96,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotate: 0,
+            scale: 1,
+            duration: 1.1,
+            ease: "power4.out",
+          }
+        )
+          .fromTo(
+            image,
+            { scale: 1.14 },
+            {
+              scale: 1,
+              duration: 1.25,
+              ease: "power3.out",
+            },
+            "-=0.95"
+          )
+          .fromTo(
+            [body, number],
+            { opacity: 0, y: 26 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.75,
+              stagger: 0.08,
+              ease: "power3.out",
+            },
+            "-=0.8"
+          )
+          .fromTo(
+            chips,
+            { opacity: 0, y: 12 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.35,
+              stagger: 0.03,
+              ease: "power2.out",
+            },
+            "-=0.3"
+          );
+
+        gsap.to(image, {
+          yPercent: idx % 2 === 0 ? -8 : -5,
+          ease: "none",
+          scrollTrigger: {
+            trigger: stackItem || card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        if (nextCard && nextStackItem && window.matchMedia("(min-width: 768px)").matches) {
+          gsap.to(card, {
+            scale: 0.94,
+            opacity: 0.72,
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextStackItem,
+              start: "top 78%",
+              end: "top 28%",
+              scrub: true,
+            },
+          });
+
+          gsap.to(body, {
+            y: -18,
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextStackItem,
+              start: "top 78%",
+              end: "top 28%",
+              scrub: true,
+            },
+          });
+        }
       });
 
       ScrollTrigger.refresh();
-
-      const onResize = () => ScrollTrigger.refresh();
-      window.addEventListener("resize", onResize);
-      return () => window.removeEventListener("resize", onResize);
-    });
+    }, pageRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <>
-      <div style={{ background: "#000", color: "#fff", fontFamily: "var(--font-inter, sans-serif)" }}>
-        <Navbar />
+    <div
+      ref={pageRef}
+      style={{
+        background: "#000",
+        color: "#fff",
+        fontFamily: "var(--font-inter, sans-serif)",
+      }}
+    >
+      <Navbar />
 
-        {/* ── HERO ── */}
-        <section
-          ref={heroRef}
-          className="projects-hero"
-          style={{ padding: "0 clamp(24px,5vw,64px) clamp(48px,8vh,80px)" }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 1,
-              background: "rgba(255,255,255,0.06)",
-            }}
-          />
+      <section
+        className="projects-hero"
+        style={{ padding: "0 clamp(24px,5vw,64px) clamp(48px,8vh,80px)" }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 1,
+            background: "rgba(255,255,255,0.06)",
+          }}
+        />
 
-          <p className="pw-hero-label text-micro" style={{ marginBottom: 24 }}>
-            / REPOSITORY
-          </p>
+        <p className="pw-hero-label text-micro" style={{ marginBottom: 24 }}>
+          / REPOSITORY
+        </p>
 
-          <h1
-            className="pw-hero-title"
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: "clamp(72px,16vw,180px)",
-              fontWeight: 900,
-              textTransform: "uppercase",
-              lineHeight: 0.82,
-              letterSpacing: "-0.02em",
-              margin: 0,
-            }}
-          >
-            PROJECT{" "}
-            <span style={{ color: "rgba(255,255,255,0.14)" }}>WALL</span>.
-          </h1>
+        <h1 className="pw-hero-title">
+          <span className="pw-hero-title-line">PROJECT</span>
+          <span className="pw-hero-title-line muted">WALL.</span>
+        </h1>
 
-          <div className="pw-hero-hint projects-hint">
-            <div className="line" />
-            <span>SCROLL DOWN TO EXPLORE ALL PROJECTS</span>
-          </div>
-        </section>
+        <div className="pw-hero-hint projects-hint">
+          <div className="line" />
+          <span>SCROLL DOWN TO EXPLORE THE STACK</span>
+        </div>
+      </section>
 
-        {/* ── PINNED HORIZONTAL SECTION ── */}
-        <div ref={outerRef} className="projects-pinned">
-          <div
-            ref={trackRef}
-            className="projects-track"
-            style={{ width: `${N * 100}vw` }}
-          >
-            {HARDCODED_PROJECTS.map((project, idx) => (
-              <div key={project._id} className="pw-card project-card">
-                {/* Image */}
+      <section className="projects-stack">
+        <div className="projects-wall-kicker">
+          <span>Selected builds</span>
+          <span>{HARDCODED_PROJECTS.length} live stories</span>
+        </div>
+
+        <div className="projects-stack-list">
+          {HARDCODED_PROJECTS.map((project, idx) => (
+            <div key={project._id} className="project-stack-item">
+              <article
+                ref={(el) => (cardsRef.current[idx] = el)}
+                className="pw-card project-card project-card-stack"
+              >
                 <div className="project-card-image">
                   <div
                     className="bg-img"
                     style={{ backgroundImage: `url(${project.image})` }}
                   />
-                  <div className="big-number">
-                    {String(idx + 1).padStart(2, "0")}
-                  </div>
+                  <div className="project-image-overlay" />
+                  <div className="big-number">{String(idx + 1).padStart(2, "0")}</div>
                 </div>
 
-                {/* Content */}
                 <div className="pw-card-body project-card-body">
                   <div>
                     <p className="project-domain">{project.domain}</p>
@@ -218,16 +277,12 @@ export default function Projects() {
                   </div>
 
                   <div>
-                    {/* Contributors header */}
                     <div className="project-contributors-header">
                       <span>Contributors</span>
                       <div className="line" />
-                      <span className="count">
-                        {project.members.length} members
-                      </span>
+                      <span className="count">{project.members.length} members</span>
                     </div>
 
-                    {/* Member chips */}
                     <div className="project-members">
                       {project.members.map((name) => (
                         <span key={name} className="project-member">
@@ -236,27 +291,25 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* View link */}
                     <div className="project-footer">
                       <a
                         href={project.deployedLink}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="project-link"
-                        onClick={(e) => e.stopPropagation()}
                       >
-                        VIEW PROJECT <span style={{ fontSize: 15 }}>→</span>
+                        VIEW PROJECT <span style={{ fontSize: 15 }}>&rarr;</span>
                       </a>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              </article>
+            </div>
+          ))}
         </div>
+      </section>
 
-        <Footer />
-      </div>
-    </>
+      <Footer />
+    </div>
   );
 }

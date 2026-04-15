@@ -84,10 +84,7 @@ export default function Footer() {
       <div className="container footer-inner">
         {/* Duo icon for footer */}
         <div ref={brandRef} className="footer-brand-wrap" style={{ opacity: 0 }}>
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style={{ marginBottom: 16 }}>
-            <circle cx="17" cy="24" r="13" stroke="var(--color-accent)" strokeWidth="1.5" fill="none" opacity="0.7" />
-            <circle cx="31" cy="24" r="13" stroke="var(--color-white)" strokeWidth="1.5" fill="none" opacity="0.5" />
-          </svg>
+              <img src="/logo.png" alt="DevSource Logo" style={{ width: "36px", height: "36px", objectFit: "contain" }} className="duo-icon" />
           <h2 className="footer-brand">
             DEV<span className="accent">DUO</span>.
           </h2>
@@ -97,7 +94,7 @@ export default function Footer() {
         {/* Social Icons */}
         <div ref={socialsRef} className="footer-socials">
           {socialLinks.map(({ Icon, href }, i) => (
-            <a key={i} href={href} target="_blank" rel="noopener noreferrer">
+            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="interactive">
               <Icon />
             </a>
           ))}
@@ -106,7 +103,7 @@ export default function Footer() {
         {/* Navigation */}
         <nav ref={navRef} className="footer-nav">
           {footerNavItems.map((item) => (
-            <Link key={item.label} to={item.path}>
+            <Link key={item.label} to={item.path} className="interactive">
               {item.label}
             </Link>
           ))}

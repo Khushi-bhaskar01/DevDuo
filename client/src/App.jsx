@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
+import CustomCursor from "./components/CustomCursor";
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
@@ -23,6 +24,7 @@ export default function App() {
 
   return (
     <>
+      <CustomCursor />
       {showLoader && <InitialLoader onComplete={handleLoaderComplete} />}
       {!showLoader && (
         <Router>

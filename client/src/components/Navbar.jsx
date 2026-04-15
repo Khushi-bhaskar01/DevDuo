@@ -9,41 +9,10 @@ const navigationItems = [
   { label: "Services", path: "/services" },
 ];
 
-/* Duo icon — two overlapping circles representing partnership */
+/* Duo icon — DevSource logo */
 function DuoIcon() {
   return (
-    <svg
-      width="36"
-      height="36"
-      viewBox="0 0 36 36"
-      fill="none"
-      className="duo-icon"
-    >
-      <circle
-        cx="13"
-        cy="18"
-        r="10"
-        stroke="var(--color-accent)"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.8"
-      />
-      <circle
-        cx="23"
-        cy="18"
-        r="10"
-        stroke="var(--color-white)"
-        strokeWidth="1.5"
-        fill="none"
-        opacity="0.6"
-      />
-      {/* Intersection glow */}
-      <path
-        d="M18 10.5 A10 10 0 0 1 18 25.5 A10 10 0 0 1 18 10.5"
-        fill="var(--color-accent)"
-        opacity="0.12"
-      />
-    </svg>
+    <img src="/logo.png" alt="DevSource Logo" style={{ width: "36px", height: "36px", objectFit: "contain" }} className="duo-icon" />
   );
 }
 
@@ -117,7 +86,7 @@ export default function Navbar() {
       >
         <div className="container navbar-inner">
           {/* Logo — Icon + Text, no image */}
-          <Link to="/" className="navbar-logo" ref={logoRef} style={{ opacity: 0 }}>
+          <Link to="/" className="navbar-logo interactive" ref={logoRef} style={{ opacity: 0 }}>
             <DuoIcon />
             <span className="navbar-logo-text">
               Dev<span className="duo">Duo</span>
@@ -131,7 +100,7 @@ export default function Navbar() {
                 key={item.label}
                 to={item.path}
                 ref={(el) => (linksRef.current[i] = el)}
-                className={`navbar-link ${location.pathname === item.path ? "active" : ""
+                className={`navbar-link interactive ${location.pathname === item.path ? "active" : ""
                   }`}
               >
                 {item.label}
@@ -141,7 +110,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className={`navbar-menu-btn ${isOpen ? "open" : ""}`}
+            className={`navbar-menu-btn interactive ${isOpen ? "open" : ""}`}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >

@@ -6,88 +6,86 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
   const sectionRef = useRef(null);
-  const blobRef = useRef(null);
-  const blob2Ref = useRef(null);
-  const indexRef = useRef(null);
-  const titleRef = useRef(null);
+  const contentRef = useRef(null);
+  const titleLine1 = useRef(null);
+  const titleLine2 = useRef(null);
   const subtitleRef = useRef(null);
   const ctaRef = useRef(null);
+  const indexRef = useRef(null);
   const duoSymbolRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Parallax dual blobs (the duo)
-      gsap.to(blobRef.current, {
-        y: 200,
-        x: -50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
+      // 3D Tilt Effect
+      const handleMouseMove = (e) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        const xPos = (clientX / innerWidth - 0.5) * 20;
+        const yPos = (clientY / innerHeight - 0.5) * 20;
 
-      gsap.to(blob2Ref.current, {
-        y: 150,
-        x: 50,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
+        gsap.to(contentRef.current, {
+          rotateY: xPos,
+          rotateX: -yPos,
+          duration: 1,
+          ease: "power2.out",
+        });
+      };
 
-      // Hero entrance timeline
-      const tl = gsap.timeline({ delay: 0.2 });
+      window.addEventListener("mousemove", handleMouseMove);
+
+      // Animation Timeline
+      const tl = gsap.timeline({ delay: 0.5 });
 
       tl.fromTo(
         indexRef.current,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-      )
-        .fromTo(
-          titleRef.current,
-          { opacity: 0, y: 80, filter: "blur(12px)" },
-          { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.4, ease: "power4.out" },
-          "-=0.6"
-        )
-        .fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
-          "-=0.6"
-        )
-        .fromTo(
-          ctaRef.current,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
-          "-=0.5"
-        );
+      );
 
-      // Duo symbol — gentle floating animation
-      if (duoSymbolRef.current) {
-        gsap.to(duoSymbolRef.current, {
-          y: -10,
-          duration: 3,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-        });
-      }
+      // Animate title
+      tl.fromTo(
+        ".hero-title",
+        { y: 40, opacity: 0, filter: "blur(10px)" },
+        { 
+          y: 0, 
+          opacity: 1, 
+          filter: "blur(0px)",
+          duration: 1.2, 
+          ease: "power4.out" 
+        },
+        "-=0.6"
+      );
 
-      // Floating corner decorations
-      gsap.to(".hero-corner", {
-        opacity: 0.3,
-        duration: 2,
-        ease: "power2.inOut",
-        repeat: -1,
+      tl.fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+        "-=1"
+      );
+
+      tl.fromTo(
+         ".hero-center-tag",
+         { opacity: 0, scale: 0.9 },
+         { opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
+         "-=0.5"
+      );
+
+      tl.fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+        "-=0.8"
+      );
+
+      // Duo symbol floating
+      gsap.to(duoSymbolRef.current, {
+        y: -15,
+        duration: 3,
+        ease: "sine.inOut",
         yoyo: true,
-        stagger: 0.3,
+        repeat: -1,
       });
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -95,76 +93,82 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} id="home" className="hero">
-      {/* Dual blobs — representing the duo */}
-      <div ref={blobRef} className="hero-blob hero-blob-left" />
-      <div ref={blob2Ref} className="hero-blob hero-blob-right" />
-
-      <div className="container hero-content">
+      <div className="container hero-content" ref={contentRef} style={{ transformStyle: "preserve-3d" }}>
         {/* Index Label */}
-        <div ref={indexRef} className="hero-index">
-          <span className="label">DEVDUO — COLLECTIVE</span>
+        <div ref={indexRef} className="hero-index" style={{ marginBottom: "20px" }}>
+          <span className="label">CRAFTING &bull; DIGITAL &bull; EXCELLENCE</span>
           <div className="line" />
-          <span className="year">EST. 2024</span>
+          <span className="year">2024 ED.</span>
         </div>
 
+        {/* Main Title with Reveal Mechanism */}
         {/* Main Title */}
-        <h1 ref={titleRef} className="hero-title">
+        <h1 className="hero-title" style={{ fontSize: "clamp(48px, 10vw, 120px)", marginBottom: "24px" }}>
           TWO MINDS <span className="muted">·</span>
           <br />
           <span style={{ display: "inline-flex", alignItems: "center", gap: "16px" }}>
             ONE <span className="accent-text">VISION</span>
-            <span ref={duoSymbolRef} className="accent-ring">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="14" cy="20" r="10" stroke="var(--color-accent)" strokeWidth="1.5" opacity="0.8" />
-                <circle cx="26" cy="20" r="10" stroke="white" strokeWidth="1.5" opacity="0.5" />
-              </svg>
-            </span>
           </span>
         </h1>
 
+        <div className="hero-center-tag" style={{ 
+          margin: "0 0 24px",
+          display: "flex",
+          justifyContent: "center",
+          opacity: 0
+        }}>
+          <span style={{
+            fontSize: "10px",
+            fontWeight: "900",
+            textTransform: "uppercase",
+            letterSpacing: "0.4em",
+            color: "var(--color-white)",
+            border: "1px solid rgba(255,255,255,0.1)",
+            padding: "6px 20px",
+            borderRadius: "100px",
+            background: "rgba(255,255,255,0.03)",
+            backdropFilter: "blur(12px)"
+          }}>
+            FUTURE READY &bull; DUO DRIVEN
+          </span>
+        </div>
+
         {/* Subtitle */}
-        <p ref={subtitleRef} className="hero-subtitle">
-          We are DevDuo — a partnership-driven development collective that turns 
-          bold ideas into production-grade realities. Where two perspectives converge, 
-          extraordinary things happen.
+        <p ref={subtitleRef} className="hero-subtitle" style={{ fontSize: "15px", marginBottom: "32px", maxWidth: "500px" }}>
+          Elite digital collective blending engineering precision with artistic vision. 
+          We craft immersive experiences that define the digital future.
         </p>
 
         {/* CTA Buttons */}
         <div ref={ctaRef} className="hero-cta">
           <button
-            className="btn-primary"
+            className="btn-primary interactive"
             onClick={() => (window.location.href = "/projects")}
           >
-            <span>EXPLORE PROJECTS</span>
+            <span>DISCOVER OUR WORK</span>
             <span style={{ fontSize: 16 }}>→</span>
           </button>
           <button
-            className="btn-secondary"
+            className="btn-secondary interactive"
             onClick={() =>
               document
                 .getElementById("about")
                 ?.scrollIntoView({ behavior: "smooth" })
             }
           >
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "var(--color-accent)",
-                display: "inline-block",
-              }}
-            />
+            <span className="ping-dot" style={{ width: 8, height: 8 }} />
             MEET THE DUO
           </button>
         </div>
       </div>
 
-      {/* Decorative corners */}
+      {/* Decorative elements */}
       <div className="hero-corner tl" />
       <div className="hero-corner tr" />
       <div className="hero-corner bl" />
       <div className="hero-corner br" />
+
+      <div className="premium-grid" style={{ position: "absolute", inset: 0, opacity: 0.1, zIndex: -1 }} />
     </section>
   );
 }
