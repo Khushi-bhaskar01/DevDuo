@@ -24,13 +24,13 @@ const services = [
     number: "03",
     title: "Game Development",
     desc: "Immersive gaming experiences crafted with Unity, Godot, and Unreal Engine. From 2D indie games to 3D multiplayer environments, we push creative boundaries with every build.",
-    tags: ["UNITY", "GODOT", "UNREAL", "C#", "BLENDER", "SHADER"],
+    tags: ["GODOT", "UNREAL", "C#", "BLENDER", "SHADER"],
   },
   {
     number: "04",
     title: "UI/UX Design",
     desc: "Research-driven design that converts. We create intuitive interfaces, comprehensive design systems, and interactive prototypes that delight users and drive engagement.",
-    tags: ["FIGMA", "ADOBE XD", "PROTOTYPING", "DESIGN SYSTEMS", "A/B TESTING"],
+    tags: ["FIGMA", "PROTOTYPING", "DESIGN SYSTEMS"],
   },
   {
     number: "05",
@@ -42,7 +42,7 @@ const services = [
     number: "06",
     title: "DevOps & Cloud",
     desc: "Scalable infrastructure and seamless deployment pipelines. From containerized microservices to serverless architectures, we ensure your code ships fast and stays reliable.",
-    tags: ["AWS", "DOCKER", "KUBERNETES", "VERCEL", "NGINX", "MONITORING"],
+    tags: ["AWS", "DOCKER", "KUBERNETES", "VERCEL"],
   },
 ];
 

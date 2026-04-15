@@ -10,7 +10,7 @@ const teamMembers = [
     name: "Adarsh Tiwari",
     role: "Lead",
     id: "01",
-    skills: ["REACT", "NODE.JS", "UI/UX"],
+    skills: ["Full Stack Developer", "App Dev", "Game Dev"],
     image: "/images/AdarshTiwari.png",
     github: "#",
     linkedin: "#",
@@ -19,7 +19,7 @@ const teamMembers = [
     name: "Khushi Bhaskar",
     role: "Vice Lead",
     id: "02",
-    skills: ["MERN", "DOCKER", "AWS"],
+    skills: ["Full Stack Developer", "DOCKER", "AWS"],
     image: "/images/KB.jpg",
     github: "https://github.com/Khushi-bhaskar01",
     linkedin: "https://www.linkedin.com/in/khushi-bhaskar-b00586324/",
@@ -44,6 +44,7 @@ export default function TeamSection() {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -60,6 +61,7 @@ export default function TeamSection() {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -76,6 +78,7 @@ export default function TeamSection() {
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -92,6 +95,7 @@ export default function TeamSection() {
           scrollTrigger: {
             trigger: card,
             start: "top 88%",
+            toggleActions: "play reverse play reverse"
           },
         });
 

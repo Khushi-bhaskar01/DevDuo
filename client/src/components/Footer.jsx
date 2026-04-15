@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaInstagram, FaDiscord } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaDiscord, FaGoogle, FaPhoneAlt } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,36 +81,62 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="footer">
-      <div className="container footer-inner">
-        {/* Duo icon for footer */}
-        <div ref={brandRef} className="footer-brand-wrap" style={{ opacity: 0 }}>
-              <img src="/logo.png" alt="DevSource Logo" style={{ width: "36px", height: "36px", objectFit: "contain" }} className="duo-icon" />
-          <h2 className="footer-brand">
-            DEV<span className="accent">DUO</span>.
-          </h2>
+      <div className="container footer-layout">
+        
+        {/* Left Side: Logo & Navigation */}
+        <div ref={brandRef} className="footer-left" style={{ opacity: 0 }}>
+          <div className="footer-brand-header">
+            <img src="/logo.png" alt="DevSource Logo" style={{ width: "28px", height: "28px", objectFit: "contain" }} className="duo-icon" />
+            <h2 className="footer-brand">
+              DEV<span className="accent">DUO</span>.
+            </h2>
+          </div>
           <p className="footer-tagline">Two Minds · One Vision</p>
+
+          <nav ref={navRef} className="footer-nav-column">
+            {footerNavItems.map((item) => (
+              <Link 
+                key={item.label} 
+                to={item.path} 
+                className="interactive footer-nav-link"
+                onClick={() => {
+                  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
-        {/* Social Icons */}
-        <div ref={socialsRef} className="footer-socials">
-          {socialLinks.map(({ Icon, href }, i) => (
-            <a key={i} href={href} target="_blank" rel="noopener noreferrer" className="interactive">
-              <Icon />
-            </a>
-          ))}
+        {/* Right Side: Social Profiles */}
+        <div ref={socialsRef} className="footer-right">
+          
+          <div className="footer-profile">
+            <h3 className="footer-profile-name">Adarsh Tiwari</h3>
+            <div className="footer-profile-links">
+              <a href="mailto:adarsh@example.com" className="interactive" aria-label="Mail"><FaGoogle /></a>
+              <a href="tel:+910000000000" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
+              <a href="https://linkedin.com/in/adarshtiwari" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
+            </div>
+          </div>
+          
+          <div className="footer-profile">
+            <h3 className="footer-profile-name">Khushi Bhaskar</h3>
+            <div className="footer-profile-links">
+              <a href="mailto:khushi@example.com" className="interactive" aria-label="Mail"><FaGoogle /></a>
+              <a href="tel:+910000000000" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
+              <a href="https://linkedin.com/in/khushibhaskar" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
+            </div>
+          </div>
+          
         </div>
 
-        {/* Navigation */}
-        <nav ref={navRef} className="footer-nav">
-          {footerNavItems.map((item) => (
-            <Link key={item.label} to={item.path} className="interactive">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+      </div>
 
-        {/* Copyright */}
-        <div className="footer-copyright">
+      {/* Copyright */}
+      <div className="container">
+        <div className="footer-copyright" style={{ borderTop: "1px solid var(--color-border)", paddingTop: "32px", marginTop: "40px" }}>
           <span>© {new Date().getFullYear()} DEVDUO_COLLECTIVE</span>
           <div className="footer-dots">
             <div className="dot" />

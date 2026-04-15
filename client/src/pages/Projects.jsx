@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import ProjectCard from "../components/ProjectCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,25 +10,25 @@ gsap.registerPlugin(ScrollTrigger);
 const HARDCODED_PROJECTS = [
   {
     _id: "p1",
-    title: "DevDuo Portfolio",
-    members: ["Adarsh Tiwari", "Khushi Bhaskar"],
-    deployedLink: "https://dev-source-portfolio.vercel.app/",
+    title: "The Voice of Glaciers",
+    members: ["Adarsh Tiwari"],
+    deployedLink: "https://thevoiceofglaciers.org/",
     domain: "Web Development",
     description:
-      "Our flagship portfolio - a showcase of everything we've built as a duo. Dynamic content, premium animations, and an identity that speaks for itself.",
-    tags: ["GSAP", "React", "Vite"],
-    image: "/portfolio.png",
+      "A non-profit organization dedicated to raising awareness about the impact of climate change on glaciers and their surrounding ecosystems.",
+    tags: ["GSAP", "TailwindCSS", "Next.js"],
+    image: "/voice.png",
   },
   {
     _id: "p2",
-    title: "ICPC Website",
+    title: "Policy Perspective Foundation",
     members: ["Adarsh Tiwari", "Khushi Bhaskar"],
-    deployedLink: "https://www.icpcusict.dev/",
+    deployedLink: "https://ppf-website-pink.vercel.app/",
     domain: "Web Development",
     description:
-      "Official website of ICPC USICT ACM Student Chapter - competitive programming portal with problem archives, live contest updates, member profiles and leaderboard.",
-    tags: ["Next.js", "Node.js"],
-    image: "/icpc.png",
+      "STILL UNDER DEVELOPMENT - Official website of Policy Perspective Foundation - a non-profit organization dedicated to raising awareness about the impact of climate change on glaciers and their surrounding ecosystems.",
+    tags: ["Next.js", "TailwindCSS"],
+    image: "/ppf.png",
   },
   {
     _id: "p3",
@@ -50,6 +51,17 @@ const HARDCODED_PROJECTS = [
       "Community-driven platform showcasing the beloved dogs of IPU campus - featuring photos, adoption, events and heartwarming stories contributed by students.",
     tags: ["Next.js", "Supabase"],
     image: "/doggos.png",
+  },
+   {
+    _id: "p5",
+    title: "ICPC USICT ACM Student Chapter",
+    members: ["Adarsh Tiwari", "Khushi Bhaskar"],
+    deployedLink: "https://www.icpcusict.dev/",
+    domain: "Web Development",
+    description:
+      "Official website of ICPC USICT ACM Student Chapter - competitive programming portal with problem archives, live contest updates, member profiles and leaderboard.",
+    tags: ["Next.js", "Supabase"],
+    image: "/icpc.png",
   },
 ];
 
@@ -90,15 +102,12 @@ export default function Projects() {
         const image = card.querySelector(".bg-img");
         const body = card.querySelector(".project-card-body");
         const number = card.querySelector(".big-number");
-        const chips = card.querySelectorAll(".project-tag, .project-member");
-        const nextCard = cardsRef.current[idx + 1];
-        const stackItem = card.closest(".project-stack-item");
-        const nextStackItem = nextCard?.closest(".project-stack-item");
 
         const tl = gsap.timeline({
           scrollTrigger: {
-            trigger: stackItem || card,
-            start: "top 82%",
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         });
 
@@ -106,89 +115,39 @@ export default function Projects() {
           card,
           {
             opacity: 0,
-            y: 90,
-            rotate: idx % 2 === 0 ? -1.8 : 1.8,
-            scale: 0.96,
+            y: 80,
+            scale: 0.95,
           },
           {
             opacity: 1,
             y: 0,
-            rotate: 0,
             scale: 1,
-            duration: 1.1,
+            duration: 1.2,
             ease: "power4.out",
           }
         )
-          .fromTo(
-            image,
-            { scale: 1.14 },
-            {
-              scale: 1,
-              duration: 1.25,
-              ease: "power3.out",
-            },
-            "-=0.95"
-          )
-          .fromTo(
-            [body, number],
-            { opacity: 0, y: 26 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.75,
-              stagger: 0.08,
-              ease: "power3.out",
-            },
-            "-=0.8"
-          )
-          .fromTo(
-            chips,
-            { opacity: 0, y: 12 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.35,
-              stagger: 0.03,
-              ease: "power2.out",
-            },
-            "-=0.3"
-          );
-
-        gsap.to(image, {
-          yPercent: idx % 2 === 0 ? -8 : -5,
-          ease: "none",
-          scrollTrigger: {
-            trigger: stackItem || card,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
+        .fromTo(
+          image,
+          { scale: 1.15 },
+          {
+            scale: 1,
+            duration: 1.4,
+            ease: "power3.out",
           },
-        });
-
-        if (nextCard && nextStackItem && window.matchMedia("(min-width: 768px)").matches) {
-          gsap.to(card, {
-            scale: 0.94,
-            opacity: 0.72,
-            ease: "none",
-            scrollTrigger: {
-              trigger: nextStackItem,
-              start: "top 78%",
-              end: "top 28%",
-              scrub: true,
-            },
-          });
-
-          gsap.to(body, {
-            y: -18,
-            ease: "none",
-            scrollTrigger: {
-              trigger: nextStackItem,
-              start: "top 78%",
-              end: "top 28%",
-              scrub: true,
-            },
-          });
-        }
+          "-=1"
+        )
+        .fromTo(
+          [body, number],
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power3.out",
+          },
+          "-=0.9"
+        );
       });
 
       ScrollTrigger.refresh();
@@ -244,66 +203,15 @@ export default function Projects() {
           <span>{HARDCODED_PROJECTS.length} live stories</span>
         </div>
 
-        <div className="projects-stack-list">
+        <div className="projects-grid-list">
           {HARDCODED_PROJECTS.map((project, idx) => (
-            <div key={project._id} className="project-stack-item">
-              <article
+            <div key={project._id} className="project-grid-item">
+              <ProjectCard 
                 ref={(el) => (cardsRef.current[idx] = el)}
-                className="pw-card project-card project-card-stack"
-              >
-                <div className="project-card-image">
-                  <div
-                    className="bg-img"
-                    style={{ backgroundImage: `url(${project.image})` }}
-                  />
-                  <div className="project-image-overlay" />
-                  <div className="big-number">{String(idx + 1).padStart(2, "0")}</div>
-                </div>
-
-                <div className="pw-card-body project-card-body">
-                  <div>
-                    <p className="project-domain">{project.domain}</p>
-                    <h2 className="project-title">{project.title}</h2>
-                    <div className="project-divider" />
-                    <p className="project-desc">{project.description}</p>
-
-                    <div className="project-tags">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="project-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="project-contributors-header">
-                      <span>Contributors</span>
-                      <div className="line" />
-                      <span className="count">{project.members.length} members</span>
-                    </div>
-
-                    <div className="project-members">
-                      {project.members.map((name) => (
-                        <span key={name} className="project-member">
-                          {name}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="project-footer">
-                      <a
-                        href={project.deployedLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="project-link"
-                      >
-                        VIEW PROJECT <span style={{ fontSize: 15 }}>&rarr;</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </article>
+                project={project}
+                index={idx}
+                isMobile={window.matchMedia("(max-width: 768px)").matches}
+              />
             </div>
           ))}
         </div>

@@ -98,16 +98,16 @@ export default function HeroSection() {
         <div ref={indexRef} className="hero-index" style={{ marginBottom: "20px" }}>
           <span className="label">CRAFTING &bull; DIGITAL &bull; EXCELLENCE</span>
           <div className="line" />
-          <span className="year">2024 ED.</span>
+          <span className="year">2025 ED.</span>
         </div>
 
         {/* Main Title with Reveal Mechanism */}
         {/* Main Title */}
-        <h1 className="hero-title" style={{ fontSize: "clamp(48px, 10vw, 120px)", marginBottom: "24px" }}>
-          TWO MINDS <span className="muted">·</span>
+        <h1 className="hero-title" style={{ fontSize: "clamp(42px, 8vw, 100px)", marginBottom: "24px" }}>
+          Focused on Building <span className="muted">·</span>
           <br />
           <span style={{ display: "inline-flex", alignItems: "center", gap: "16px" }}>
-            ONE <span className="accent-text">VISION</span>
+            What<span className="accent-text">Matters.</span>
           </span>
         </h1>
 
@@ -134,9 +134,8 @@ export default function HeroSection() {
         </div>
 
         {/* Subtitle */}
-        <p ref={subtitleRef} className="hero-subtitle" style={{ fontSize: "15px", marginBottom: "32px", maxWidth: "500px" }}>
-          Elite digital collective blending engineering precision with artistic vision. 
-          We craft immersive experiences that define the digital future.
+        <p ref={subtitleRef} className="hero-subtitle" style={{ fontSize: "18px", marginBottom: "32px", maxWidth: "500px" }}>
+          We build scalable, high-impact digital experiences with precision and purpose
         </p>
 
         {/* CTA Buttons */}

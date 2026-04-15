@@ -6,6 +6,7 @@ import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
 import CustomCursor from "./components/CustomCursor";
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
   const [showLoader, setShowLoader] = useState(true);
@@ -28,6 +29,7 @@ export default function App() {
       {showLoader && <InitialLoader onComplete={handleLoaderComplete} />}
       {!showLoader && (
         <Router>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />

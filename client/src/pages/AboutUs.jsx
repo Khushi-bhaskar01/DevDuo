@@ -24,7 +24,14 @@ export default function AboutUs() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 });
+      const tl = gsap.timeline({ 
+        delay: 0.2,
+        scrollTrigger: {
+          trigger: heroTitleRef.current,
+          start: "top 90%",
+          toggleActions: "play reverse play reverse"
+        }
+      });
 
       tl.fromTo(
         heroLabelRef.current,
@@ -61,6 +68,7 @@ export default function AboutUs() {
           scrollTrigger: {
             trigger: missionTitleRef.current,
             start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -76,6 +84,7 @@ export default function AboutUs() {
           scrollTrigger: {
             trigger: philosophySectionRef.current,
             start: "top 78%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -96,7 +105,8 @@ export default function AboutUs() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: philosophySectionRef.current,
-            start: "top 72%",
+            start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -129,16 +139,15 @@ export default function AboutUs() {
               fontSize: "clamp(48px, 10vw, 100px)",
             }}
           >
-            OUR JOURNEY <span className="muted">&bull;</span> THE DUO.
+            OUR JOURNEY <span className="muted">&bull;</span> THE DEVDUO
           </h1>
           <p
             ref={heroDescRef}
             className="text-body"
-            style={{ opacity: 0, fontSize: 17 }}
+            style={{ opacity: 0, fontSize: "20px", color: "var(--color-white)", maxWidth: "600px" }}
           >
-            DevDuo was born from a simple belief: the best work happens when two
-            sharp minds collaborate without ego. We are builders, thinkers, and
-            partners shaping the future of tech, one deploy at a time.
+            DevDuo started with a simple belief - great work comes from clear thinking and strong collaboration. 
+            We build, learn, and grow together, shaping ideas into real-world solutions.
           </p>
         </div>
       </section>

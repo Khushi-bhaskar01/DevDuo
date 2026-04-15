@@ -100,8 +100,8 @@ export default function Navbar() {
                 key={item.label}
                 to={item.path}
                 ref={(el) => (linksRef.current[i] = el)}
-                className={`navbar-link interactive ${location.pathname === item.path ? "active" : ""
-                  }`}
+                className={`navbar-link interactive ${location.pathname === item.path ? "active" : ""}`}
+                onClick={() => window.scrollTo(0, 0)}
               >
                 {item.label}
               </Link>
@@ -131,7 +131,10 @@ export default function Navbar() {
           <Link
             key={item.label}
             to={item.path}
-            onClick={() => setIsOpen(false)}
+            onClick={() => {
+              setIsOpen(false);
+              window.scrollTo(0, 0);
+            }}
           >
             {item.label}
           </Link>

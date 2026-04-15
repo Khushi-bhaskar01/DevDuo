@@ -13,7 +13,7 @@ const categories = [
 
 const stats = [
   { number: "02", label: "FOUNDERS" },
-  { number: "15+", label: "SHIPPED" },
+  { number: "5+", label: "SHIPPED" },
   { number: "04", label: "DOMAINS" },
   { number: "∞", label: "PASSION" },
 ];
@@ -39,6 +39,7 @@ export default function AboutSection() {
           scrollTrigger: {
             trigger: titleRef.current,
             start: "top 80%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -64,6 +65,7 @@ export default function AboutSection() {
           scrollTrigger: {
             trigger: ".about-grid",
             start: "top 85%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -81,6 +83,7 @@ export default function AboutSection() {
           scrollTrigger: {
             trigger: ".about-stats",
             start: "top 90%",
+            toggleActions: "play reverse play reverse"
           },
         }
       );
@@ -106,7 +109,7 @@ export default function AboutSection() {
               ))}
             </h2>
           </div>
-          <p className="text-body">
+          <p className="text-body" style={{ fontSize: "20px", color: "var(--color-white)", maxWidth: "600px" }}>
             DevDuo is an elite collaboration of two specialists who believe in 
             the power of focus. We don't scale with people; we scale with 
             intelligence and craftsmanship.
