@@ -8,8 +8,8 @@ const ProjectCard = forwardRef(({ project, index, isMobile }, ref) => {
   return (
     <article
       ref={ref}
-      className={`pw-card project-card project-card-grid interactive`}
-      data-cursor-text="View Project"
+      className={`pw-card project-card project-card-grid ${!isMobile ? 'interactive' : ''}`}
+      {...(!isMobile && { 'data-cursor-text': 'View Project' })}
       onClick={handleClick}
       style={{ cursor: "pointer" }}
     >

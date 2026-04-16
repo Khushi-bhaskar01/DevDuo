@@ -670,10 +670,6 @@ ul, ol {
   overflow: hidden;
 }
 
-.about-card:hover {
-  background: var(--color-bg-elevated);
-}
-
 .about-card-id {
   font-size: 12px;
   font-weight: 900;
@@ -690,8 +686,13 @@ ul, ol {
   transition: color 0.3s ease;
 }
 
-.about-card:hover h3 {
-  color: var(--color-accent);
+@media (hover: hover) {
+  .about-card:hover {
+    background: var(--color-bg-elevated);
+  }
+  .about-card:hover h3 {
+    color: var(--color-accent);
+  }
 }
 
 .about-card p {
@@ -835,10 +836,21 @@ ul, ol {
   pointer-events: none;
 }
 
-.team-card:hover .team-card-frame {
-  transform: translateY(-8px);
-  border-color: rgba(239, 93, 71, 0.26);
-  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
+@media (hover: hover) {
+  .team-card:hover .team-card-frame {
+    transform: translateY(-8px);
+    border-color: rgba(239, 93, 71, 0.26);
+    box-shadow: 0 34px 90px rgba(0, 0, 0, 0.42);
+  }
+
+  .team-card:hover .team-card-image {
+    border-color: rgba(239, 93, 71, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .team-card:hover .team-card-image img {
+    transform: scale(1.08);
+  }
 }
 
 .team-card-image {
@@ -852,21 +864,12 @@ ul, ol {
   transition: border-color 0.5s var(--ease-luxury), transform 0.6s var(--ease-luxury);
 }
 
-.team-card:hover .team-card-image {
-  border-color: rgba(239, 93, 71, 0.3);
-  transform: translateY(-4px);
-}
-
 .team-card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: none;
   transition: all 0.7s var(--ease-luxury);
-}
-
-.team-card:hover .team-card-image img {
-  transform: scale(1.08);
 }
 
 .team-card-image .overlay {
@@ -977,9 +980,15 @@ ul, ol {
   }
 }
 
-.service-item:hover {
-  background: linear-gradient(90deg, var(--color-accent-subtle), transparent);
-  padding-left: 32px;
+@media (hover: hover) {
+  .service-item:hover {
+    background: linear-gradient(90deg, var(--color-accent-subtle), transparent);
+    padding-left: 32px;
+  }
+
+  .service-item:hover .service-number {
+    color: var(--color-accent);
+  }
 }
 
 .service-number {
@@ -988,10 +997,6 @@ ul, ol {
   color: var(--color-gray-700);
   line-height: 1;
   transition: color 0.3s ease;
-}
-
-.service-item:hover .service-number {
-  color: var(--color-accent);
 }
 
 .service-title {
@@ -1154,6 +1159,19 @@ ul, ol {
   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.42);
   backdrop-filter: blur(16px);
   border-radius: 20px;
+  transition: transform 0.6s var(--ease-luxury), border-color 0.6s var(--ease-luxury), box-shadow 0.6s var(--ease-luxury);
+}
+
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.01);
+    border-color: rgba(239, 93, 71, 0.3);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+  }
+  
+  .project-card:hover .bg-img {
+    transform: scale(1.1);
+  }
 }
 
 .project-card-grid {
