@@ -12,8 +12,8 @@ const teamMembers = [
     id: "01",
     skills: ["Full Stack Developer", "App Dev", "Game Dev"],
     image: "/images/AdarshTiwari.png",
-    github: "#",
-    linkedin: "#",
+    github: "https://github.com/Adarsh108-tech",
+    linkedin: "https://www.linkedin.com/in/adarsh-tiwari-5084ab256/",
   },
   {
     name: "Khushi Bhaskar",

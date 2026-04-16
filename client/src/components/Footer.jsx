@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaInstagram, FaDiscord, FaGoogle, FaPhoneAlt } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaInstagram, FaDiscord, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -115,18 +115,18 @@ export default function Footer() {
           <div className="footer-profile">
             <h3 className="footer-profile-name">Adarsh Tiwari</h3>
             <div className="footer-profile-links">
-              <a href="mailto:adarsh@example.com" className="interactive" aria-label="Mail"><FaGoogle /></a>
-              <a href="tel:+910000000000" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
-              <a href="https://linkedin.com/in/adarshtiwari" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="mailto:adarsh16221@gmail.com" className="interactive" aria-label="Mail"><FaEnvelope /></a>
+              <a href="tel:+919817368861" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
+              <a href="https://www.linkedin.com/in/adarsh-tiwari-5084ab256/" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
             </div>
           </div>
           
           <div className="footer-profile">
             <h3 className="footer-profile-name">Khushi Bhaskar</h3>
             <div className="footer-profile-links">
-              <a href="mailto:khushi@example.com" className="interactive" aria-label="Mail"><FaGoogle /></a>
-              <a href="tel:+910000000000" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
-              <a href="https://linkedin.com/in/khushibhaskar" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
+              <a href="mailto:khushibhaskar.2006@gmail.com" className="interactive" aria-label="Mail"><FaEnvelope /></a>
+              <a href="tel:+919667433762" className="interactive" aria-label="Phone"><FaPhoneAlt /></a>
+              <a href="https://www.linkedin.com/in/khushi-bhaskar-b00586324/" target="_blank" rel="noopener noreferrer" className="interactive" aria-label="LinkedIn"><FaLinkedin /></a>
             </div>
           </div>
           

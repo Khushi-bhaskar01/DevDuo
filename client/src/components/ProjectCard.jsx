@@ -29,30 +29,9 @@ const ProjectCard = forwardRef(({ project, index, isMobile }, ref) => {
           <div className="project-divider" />
           <p className="project-desc">{project.description}</p>
 
-          <div className="project-tags">
-            {project.tags.map((tag) => (
-              <span key={tag} className="project-tag">
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div>
-          <div className="project-contributors-header">
-            <span>Contributors</span>
-            <div className="line" />
-            <span className="count">{project.members.length} members</span>
-          </div>
-
-          <div className="project-members">
-            {project.members.map((name) => (
-              <span key={name} className="project-member">
-                {name}
-              </span>
-            ))}
-          </div>
-
           <div className="project-footer">
             <a
               href={project.deployedLink}

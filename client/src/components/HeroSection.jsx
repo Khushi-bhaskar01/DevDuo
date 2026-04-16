@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function HeroSection() {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const titleLine1 = useRef(null);
@@ -142,7 +144,7 @@ export default function HeroSection() {
         <div ref={ctaRef} className="hero-cta">
           <button
             className="btn-primary interactive"
-            onClick={() => (window.location.href = "/projects")}
+            onClick={() => navigate("/projects")}
           >
             <span>DISCOVER OUR WORK</span>
             <span style={{ fontSize: 16 }}>→</span>

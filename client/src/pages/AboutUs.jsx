@@ -67,24 +67,24 @@ export default function AboutUs() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: missionTitleRef.current,
-            start: "top 85%",
-            toggleActions: "play reverse play reverse"
+            start: "top 95%",
+            end: "top 60%",
+            scrub: true,
           },
         }
       );
 
       gsap.fromTo(
         ".about-page-philosophy-panel",
-        { opacity: 0, y: 36 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          ease: "power3.out",
           scrollTrigger: {
             trigger: philosophySectionRef.current,
-            start: "top 78%",
-            toggleActions: "play reverse play reverse"
+            start: "top 95%",
+            end: "top 30%",
+            scrub: true,
           },
         }
       );
@@ -92,21 +92,18 @@ export default function AboutUs() {
       gsap.fromTo(
         ".about-page-philosophy-line",
         {
-          opacity: 0.18,
-          yPercent: 24,
-          clipPath: "inset(0% 0% 100% 0%)",
+          opacity: 0.1,
+          y: 30,
         },
         {
           opacity: 1,
-          yPercent: 0,
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 1,
-          stagger: 0.14,
-          ease: "power3.out",
+          y: 0,
+          stagger: 0.2,
           scrollTrigger: {
             trigger: philosophySectionRef.current,
-            start: "top 85%",
-            toggleActions: "play reverse play reverse"
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true,
           },
         }
       );

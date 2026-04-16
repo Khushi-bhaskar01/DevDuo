@@ -109,11 +109,9 @@ export default function AboutSection() {
               ))}
             </h2>
           </div>
-          <p className="text-body" style={{ fontSize: "20px", color: "var(--color-white)", maxWidth: "600px" }}>
-            DevDuo is an elite collaboration of two specialists who believe in 
-            the power of focus. We don't scale with people; we scale with 
-            intelligence and craftsmanship.
-          </p>
+          {/* <p className="text-body" style={{ fontSize: "20px", color: "var(--color-white)", maxWidth: "600px" }}>
+            We are DevDuo, a partnership of two dedicated developers who believe that true impact comes from focus and precision. We don't just build software; we engineer solutions that matter, combining our strengths to deliver excellence in every line of code.
+          </p> */}
         </div>
 
         <div className="about-grid">

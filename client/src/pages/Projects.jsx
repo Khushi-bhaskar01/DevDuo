@@ -193,7 +193,7 @@ export default function Projects() {
 
         <div className="pw-hero-hint projects-hint">
           <div className="line" />
-          <span>SCROLL DOWN TO EXPLORE THE STACK</span>
+          <span>SCROLL DOWN TO EXPLORE THE WORK</span>
         </div>
       </section>
 
