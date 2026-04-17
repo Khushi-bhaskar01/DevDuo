@@ -26,7 +26,7 @@ const HARDCODED_PROJECTS = [
     deployedLink: "https://ppf-website-pink.vercel.app/",
     domain: "Web Development",
     description:
-      "STILL UNDER DEVELOPMENT - Official website of Policy Perspective Foundation - a non-profit organization dedicated to raising awareness about the impact of climate change on glaciers and their surrounding ecosystems.",
+      "STILL UNDER DEVELOPMENT - Official website of Policy Perspectives Foundation (PPF), an independent think-tank shaping the 21st century through deep-dive analysis and socio-economic insights.",
     tags: ["Next.js", "TailwindCSS"],
     image: "/ppf.png",
   },
